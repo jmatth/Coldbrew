@@ -1,0 +1,21 @@
+{
+  "name": "coldbrew",
+  "description": "Easy java webapp",
+  "main": "",
+  "authors": [
+    "Josh Matthews <josh@jmatthews.us>"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7"
+  }
+}

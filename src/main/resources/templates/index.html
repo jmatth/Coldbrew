@@ -1,0 +1,54 @@
+{% extends "base" %}
+
+{% block content %}
+
+
+<div class="jumbotron">
+    <h1>Welcome To Coldbrew</h1>
+    <p class="lead">
+        Congratulations, if you're seeing this page in your browser it means you've successfully gotten Coldbrew to compile and run!
+        See below for details on how to get started adding your own code.
+    </p>
+</div>
+
+<div class="row marketing">
+    <div class="col-lg-6">
+        <h4>Adding Routes</h4>
+        <p>
+            All the code that handles HTTP requests lives in <code>src/main/java/Coldbrew/App.java</code>. Look there to start adding your own code.
+        </p>
+
+        <h4>What About IDE Support?</h4>
+        <p>
+            You can import the project into <a href="https://www.jetbrains.com/help/idea/2016.2/importing-project-from-gradle-model.html" target="_blank">Intellij</a> or <a href="https://github.com/eclipse/buildship/blob/master/docs/user/Overview.md#project-import" target="_blank">Eclipse</a>. Be sure to import it as a Gradle project so the IDE picks up the dependencies from <code>build.gradle</code>.
+        </p>
+
+        <h4>I Want To Style Things</h4>
+        <p>
+            Coldbrew comes with the <a href="http://getbootstrap.com/getting-started/" target="_blank">Bootstrap</a> framework for styles, and you can put your custom styles in <code>src/main/scss/styles.scss</code>.
+        </p>
+    </div>
+
+    <div class="col-lg-6">
+        <h4>What About Javascript?</h4>
+        <p id='about-js' class="bg-danger">
+            Looks like the js build pipeline is broken, tweet <a href="https://twitter.com/jmatth92" target="_blank">@jmatth92</a>, open a <a href="https://github.com/jmatth/Coldbrew" target="_blank">Github issue</a>, or track down Josh Matthews if you're at a hackathon and think he's around.
+        </p>
+
+        <h4>What's With All The {% verbatim %}{% tags %}{% endverbatim %} In The HTML Files?</h4>
+        <p>
+            Those are part of <a href="http://www.mitchellbosecke.com/pebble/home" target="_blank">Pebble</a>, the default template engine for Coldbrew. You can use a different engine by changing the code in <code>App.java</code> (and of course updating the templates to use the new format). See <a href="http://sparkjava.com/documentation.html#views-templates" target="_blank">here</a> for a list of template engines supported by Spark.
+        </p>
+
+        <h4>I Need To Do Something You Didn't Include</h4>
+        <p>
+            In the likely event that you need to connect to a database, use an API client, or use external libraries in general, you should add those dependencies to <code>build.gradle</code>. After that you should be able to import and use them in your code.
+        </p>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block js %}
+<script src="javascript/welcome.js"></script>
+{% endblock %}

@@ -1,0 +1,63 @@
+/*
+ * For more details take a look at the Java Quickstart chapter in the Gradle
+ * user guide available at https://docs.gradle.org/2.13/userguide/tutorial_java_projects.html
+ */
+
+plugins {
+    id 'com.moowork.gulp' version '0.13'
+    id 'com.moowork.node' version '0.13'
+}
+
+// Apply the java plugin to add support for Java
+apply plugin: 'java'
+
+// Appy the appliction plugin and specify the class that contains main.
+apply plugin: 'application'
+mainClassName = 'Coldbrew.App'
+
+// In this section you declare where to find the dependencies of your project
+repositories {
+    // Use 'jcenter' for resolving your dependencies.
+    // You can declare any Maven/Ivy/file repository here.
+    jcenter()
+
+    // Used to build dependencies from github.
+    maven { url "https://jitpack.io"  }
+}
+
+// In this section you declare the dependencies for your production and test code
+dependencies {
+    // Use the SLF4J logging API backed by logback.
+    compile 'org.slf4j:slf4j-api:1.7.21'
+    compile 'ch.qos.logback:logback-classic:1.1.7'
+
+    // The spark web framework and it's template engine wrappers.
+    // The template engines published to maven are far out of date, use jitpack
+    // to pull from github until spark 2.6 is released.
+    compile 'com.sparkjava:spark-core:2.5'
+    compile 'com.github.perwendel:spark-template-engines:5a81012c9d5'
+
+    // Declare the dependency for your favourite test framework you want to use in your tests.
+    // TestNG is also supported by the Gradle Test task. Just change the
+    // testCompile dependency to testCompile 'org.testng:testng:6.8.1' and add
+    // 'test.useTestNG()' to your build script.
+    testCompile 'junit:junit:4.12'
+}
+
+
+// Resolve npm dependencies and run the 'default' gulp task.
+// This will run before the processResources step of the java build, so if there is a conflict
+// between your gulp output and the files in src/main/resources, the latter will win.
+gulp_default.dependsOn 'npmInstall'
+processResources.dependsOn gulp_default
+
+
+// Create a single Jar with the project + all depencencies.
+task fatJar(type: Jar) {
+    baseName = project.name + '-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+    manifest {
+        attributes 'Main-Class': 'Coldbrew.App'
+    }
+}
